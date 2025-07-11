@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Zoo zoo = new Zoo();
-        zoo.initializeDefaultState();
-        zoo.setOpen(true);
+        //zoo.initializeDefaultState();
+        //zoo.setOpen(true);
 
         while (true) {
             System.out.println("\n\n=== ZOO SIMULATION MAIN MENU ===");
@@ -23,7 +23,28 @@ public class Main {
                     AdminModule.runAdminModule();
                     break;
                 case "2":
-                    System.out.println("\n--> Ticketing Module (handled by another team member) would be called here.");
+                    System.out.println("\n--> Ticketing Module:");
+
+                    ZooTicketingModule ticketingModule = new ZooTicketingModule(null, null);  // Pass appropriate arguments for visitor and ticket
+
+                    System.out.println("1. Buy a Ticket");
+                    System.out.println("2. Validate a Ticket");
+                    System.out.print("Choose an option: ");
+                    String ticketChoice = scanner.nextLine();
+
+                    if (ticketChoice.equals("1")) {
+                        ticketingModule.ticketShop(); // Method to purchase ticket
+                    } else if (ticketChoice.equals("2")) {
+                        System.out.print("Enter Ticket Code to Validate: ");
+                        String ticketCode = scanner.nextLine();
+                        boolean isValid = ticketingModule.ticketChecker(ticketCode);  // Check ticket validity
+                        if (isValid) {
+                            String visitorName = ticketingModule.getVisitorNameByTicketCode(ticketCode);
+                            System.out.println("Welcome, " + visitorName + "!");
+                        }
+                    } else {
+                        System.out.println("Invalid choice. Returning to main menu.");
+                    }
                     break;
                 case "3":
 
@@ -35,8 +56,11 @@ public class Main {
                     zoo.addPerson(mockVisitor);
 
                     System.out.println("Welcome, " + mockVisitor.getName() + "! Enjoy your visit.");
-                    VisitorModule visitorModule = new VisitorModule(mockVisitor, zoo, scanner);
-                    visitorModule.start();
+
+                    //Haven't started yet:
+
+                    //VisitorModule visitorModule = new VisitorModule(mockVisitor, zoo, scanner);
+                    //visitorModule.start();
                     break;
                 case "4":
                     System.out.println("Exiting simulation. Goodbye!");

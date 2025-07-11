@@ -27,11 +27,31 @@ public class People {
     }
 }
 
-class Visitor extends People{
+class Visitor extends People {
+    private int age;
+    private String ticketCode;
+
     public Visitor(String name, String location) {
         super(name, location);
     }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setTicketCode(String ticketCode) {
+        this.ticketCode = ticketCode;
+    }
+
+    public String getTicketCode() {
+        return ticketCode;
+    }
 }
+
 
 class Manager extends People{
     private String password;

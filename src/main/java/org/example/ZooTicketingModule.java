@@ -14,6 +14,10 @@ public class ZooTicketingModule {
         this.visitorTicket = visitorTicket;
     }
 
+    public void setTicketCode(String ticketCode) {
+        this.visitorTicket = ticketCode;
+    }
+
     // Generate ticket for the visitor
     public static String generateTicketNum() {
         int randomTicketNum = (int) (Math.random() * 10000);
@@ -133,5 +137,9 @@ public class ZooTicketingModule {
     // Get the visitor name through ticket code
     public String getVisitorNameByTicketCode(String ticketCode) {
         return ticketDatabase.get(ticketCode);
+    }
+
+    public String getTicketShop() {
+        return "Ticket Shop";
     }
 }
