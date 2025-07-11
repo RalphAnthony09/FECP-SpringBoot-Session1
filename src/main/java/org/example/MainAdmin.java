@@ -27,7 +27,7 @@ public class MainAdmin {
         return false;
     }
 
-    public static void
+    //public static void
 
     public static void main(String[] args) {
 
