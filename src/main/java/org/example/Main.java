@@ -20,6 +20,7 @@ public class Main {
             switch (choice) {
                 case "1":
                     System.out.println("\n--> Admin Module (handled by another team member) would be called here.");
+                    AdminModule.runAdminModule();
                     break;
                 case "2":
                     System.out.println("\n--> Ticketing Module (handled by another team member) would be called here.");

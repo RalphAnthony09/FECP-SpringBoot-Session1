@@ -3,7 +3,7 @@ package org.example;
 import java.util.*;
 
 
-public class MainAdmin {
+public class AdminModule {
 
     public static boolean logIn(){
 
@@ -59,7 +59,7 @@ public class MainAdmin {
         System.out.println("Zoo staff setup complete.");
     }
 
-    public static void main(String[] args) {
+    public static void runAdminModule(){
 
         boolean isZooOpen;
 
@@ -92,7 +92,6 @@ public class MainAdmin {
                 case 3:
                     isZooOpen = true;
                     System.out.println("Zoo is open\n");
-                    ZooTicketingModule.ticketShop();
                     break;
                 case 4:
                     isZooOpen = false;
