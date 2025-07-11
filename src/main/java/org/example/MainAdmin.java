@@ -92,6 +92,7 @@ public class MainAdmin {
                 case 3:
                     isZooOpen = true;
                     System.out.println("Zoo is open\n");
+                    ZooTicketingModule.ticketShop();
                     break;
                 case 4:
                     isZooOpen = false;

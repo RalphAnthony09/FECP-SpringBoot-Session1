@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ZooTicketingModule {
 
-    private final Map<String, String> ticketDatabase = new HashMap<>();
+    private static final Map<String, String> ticketDatabase = new HashMap<>();
 
     private final Visitor visitor;
     private String visitorTicket;
@@ -15,13 +15,13 @@ public class ZooTicketingModule {
     }
 
     // Generate ticket for the visitor
-    public String generateTicketNum() {
+    public static String generateTicketNum() {
         int randomTicketNum = (int) (Math.random() * 10000);
         return "ZOO-" + randomTicketNum;
     }
 
     // Determine Ticket type for pricing of tickets.
-    public String ticketType(int age) {
+    public static String ticketType(int age) {
         if (age <= 5) {
             return "Child";
         }
@@ -36,7 +36,7 @@ public class ZooTicketingModule {
         }
     }
 
-    public double ticketPricing(String ticketType) {
+    public static double ticketPricing(String ticketType) {
         switch (ticketType) {
             case "Child":
                 return 0.00;
@@ -52,7 +52,7 @@ public class ZooTicketingModule {
     }
 
     // For buying Zoo Tickets
-    public void ticketShop() {
+    public static void ticketShop() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("=== WELCOME TO THE ZOO TICKET SHOP ===");
@@ -101,7 +101,6 @@ public class ZooTicketingModule {
                 String generatedTicket = generateTicketNum();
 
                 ticketDatabase.put(generatedTicket, currentVisitor.getName());
-                this.visitorTicket = generatedTicket;
 
                 System.out.println("Your ticket code is: " + generatedTicket);
                 System.out.println();
