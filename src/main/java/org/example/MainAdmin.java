@@ -61,6 +61,8 @@ public class MainAdmin {
 
     public static void main(String[] args) {
 
+        boolean isZooOpen;
+
         System.out.println("=== Welcome to the Zoo Admin Console ===");
         System.out.println("Please log in.");
 
@@ -84,6 +86,17 @@ public class MainAdmin {
             switch (choice){
                 case 1:
                     setUpZoo();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    isZooOpen = true;
+                    System.out.println("Zoo is open\n");
+                    break;
+                case 4:
+                    isZooOpen = false;
+                    System.out.println("Zoo is closed\n");
+                    break;
                 case 5:
                     return;
             }
