@@ -7,8 +7,10 @@ public class MainAdmin {
 
     public static boolean logIn(){
 
-        String adminUserName = "admin";
-        String adminPassWord = "admin";
+        Manager manager = new Manager("Masterchief", "Hospital","12345");
+
+        String adminUserName = manager.getName();
+        String adminPassWord = manager.getPassword();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -27,7 +29,35 @@ public class MainAdmin {
         return false;
     }
 
-    //public static void
+    public static void setUpZoo(){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("--- Zoo Setup ---");
+
+        System.out.printf("Enter Manager's name: ");
+        String managerName = scanner.nextLine();
+
+        System.out.printf("Enter Veterianarians's name: ");
+        String veterinarianName = scanner.nextLine();
+
+        System.out.printf("Enter Handler for Pachyderm Enclosure: ");
+        String pachydermHandlerName = scanner.nextLine();
+
+        System.out.printf("Enter Handler for Feline Enclosure: ");
+        String felineHandlerName = scanner.nextLine();
+
+        System.out.printf("Enter Handler for Bird Enclosure: ");
+        String birdHandlerName = scanner.nextLine();
+
+        System.out.printf("Enter Vendor for Ticket Shop: ");
+        String ticketShopVendorName = scanner.nextLine();
+
+        System.out.printf("Enter Vendor for Shop: ");
+        String shopVendorName = scanner.nextLine();
+
+        System.out.println("Zoo staff setup complete.");
+    }
 
     public static void main(String[] args) {
 
@@ -52,6 +82,8 @@ public class MainAdmin {
             int choice = scanner.nextInt();
 
             switch (choice){
+                case 1:
+                    setUpZoo();
                 case 5:
                     return;
             }

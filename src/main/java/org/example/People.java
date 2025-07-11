@@ -34,8 +34,15 @@ class Visitor extends People{
 }
 
 class Manager extends People{
-    public Manager(String name, String location) {
+    private String password;
+
+    public Manager(String name, String location, String password) {
         super(name, location);
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void openZoo(){
