@@ -1,145 +1,77 @@
 package org.example;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class ZooTicketingModule {
+    private Zoo zoo;
+    private Scanner scanner;
 
-    private static final Map<String, String> ticketDatabase = new HashMap<>();
-
-    private final Visitor visitor;
-    private String visitorTicket;
-
-    public ZooTicketingModule(Visitor visitor, String visitorTicket) {
-        this.visitor = visitor;
-        this.visitorTicket = visitorTicket;
+    public ZooTicketingModule(Zoo zoo, Scanner scanner) {
+        this.zoo = zoo;
+        this.scanner = scanner;
     }
 
-    public void setTicketCode(String ticketCode) {
-        this.visitorTicket = ticketCode;
-    }
-
-    // Generate ticket for the visitor
-    public static String generateTicketNum() {
-        int randomTicketNum = (int) (Math.random() * 10000);
-        return "ZOO-" + randomTicketNum;
-    }
-
-    // Determine Ticket type for pricing of tickets.
-    public static String ticketType(int age) {
-        if (age <= 5) {
-            return "Child";
-        }
-        else if (6 <= age && age <= 17) {
-            return "Student";
-        }
-        else if (18 <= age && age <= 59) {
-            return "Adult";
-        }
-        else {
-            return "Senior";
-        }
-    }
-
-    public static double ticketPricing(String ticketType) {
-        switch (ticketType) {
-            case "Child":
-                return 0.00;
-            case "Student":
-                return 75.00;
-            case "Adult":
-                return 150.00;
-            case "Senior":
-                return 50.00;
-            default:
-                return -1;
-        }
-    }
-
-    // For buying Zoo Tickets
-    public static void ticketShop() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("=== WELCOME TO THE ZOO TICKET SHOP ===");
-        System.out.println();
+    public void ticketShop() {
+        System.out.println("\n=== WELCOME TO THE ZOO TICKET SHOP ===");
         System.out.println("Here's what you can experience in the zoo:");
-        System.out.println("Visit Animal Enclosures (Elephant, Lion, Owl");
-        System.out.println("Buy snacks and drinks from our Shops");
-        System.out.println("Listen to science lectures at the Hospital");
-        System.out.println("Buy fun gifts at our Gift Shop");
-        System.out.println();
-        System.out.print("Would you like to buy a ticket? (yes/no): ");
-
+        System.out.println("Visit Animal Enclosures, Shops, and the Hospital.");
+        System.out.print("\nWould you like to buy a ticket? (yes/no): ");
         String response = scanner.nextLine();
 
         if (response.trim().equalsIgnoreCase("yes")) {
-
             System.out.print("Enter your name: ");
             String name = scanner.nextLine();
-
             System.out.print("Enter your age: ");
-            int age = scanner.nextInt();
-            scanner.nextLine();
+            int age = Integer.parseInt(scanner.nextLine());
 
-            Visitor currentVisitor = new Visitor(name, "Ticket Shop");
+            Visitor currentVisitor = new Visitor(name, zoo.getBuildingByName("Ticket Shop"));
+            currentVisitor.setAge(age);
 
             String ticketType = ticketType(age);
             double price = ticketPricing(ticketType);
 
-            if (ticketType.equals("Unknown")) {
-                System.out.println("Sorry, your age group is not supported yet.");
-                return;
-            }
-
-            System.out.println();
-            System.out.println("You qualify for a " + ticketType.toUpperCase() + " ticket.");
-            System.out.println("Ticket Price: ₱" + price);
-            System.out.println();
+            System.out.printf("\nYou qualify for a %S ticket.\n", ticketType);
+            System.out.printf("Ticket Price: P%.2f\n", price);
             System.out.print("Proceed with purchase? (yes/no) ");
-
             response = scanner.nextLine();
 
             if (response.trim().equalsIgnoreCase("yes")) {
-                System.out.println();
-                System.out.println("Ticket purchased!");
-
                 String generatedTicket = generateTicketNum();
+                currentVisitor.setTicketCode(generatedTicket);
 
-                ticketDatabase.put(generatedTicket, currentVisitor.getName());
+                zoo.addValidTicket(generatedTicket, currentVisitor);
+                zoo.addPerson(currentVisitor);
 
+                System.out.println("\nTicket purchased!");
                 System.out.println("Your ticket code is: " + generatedTicket);
-                System.out.println();
-
                 System.out.println("[Ticket added to system]");
-            }
-            else if (response.trim().equalsIgnoreCase("no")) {
+            } else {
                 System.out.println("Purchase cancelled.");
             }
-        }
-
-        else if (response.trim().equalsIgnoreCase("no")) {
+        } else {
             System.out.println("Purchase cancelled.");
         }
     }
 
-    // For checking validity of tickets
-    public boolean ticketChecker(String ticketCode) {
-        if(ticketDatabase.containsKey(ticketCode)) {
-            String visitorName = ticketDatabase.get(ticketCode);
-            System.out.println("Ticket found for " + ticketCode);
-            return true;
-        }
-        else {
-            System.out.println("Ticket not found.");
-            return false;
-        }
+    private String generateTicketNum() {
+        int randomTicketNum = (int) (Math.random() * 9000) + 1000;
+        return "ZOO-" + randomTicketNum;
     }
 
-    // Get the visitor name through ticket code
-    public String getVisitorNameByTicketCode(String ticketCode) {
-        return ticketDatabase.get(ticketCode);
+    private String ticketType(int age) {
+        if (age <= 5) return "Child";
+        if (age <= 17) return "Student";
+        if (age <= 59) return "Adult";
+        return "Senior";
     }
 
-    public String getTicketShop() {
-        return "Ticket Shop";
+    private double ticketPricing(String ticketType) {
+        switch (ticketType) {
+            case "Child": return 0.00;
+            case "Student": return 75.00;
+            case "Adult": return 150.00;
+            case "Senior": return 50.00;
+            default: return -1;
+        }
     }
 }

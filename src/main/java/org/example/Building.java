@@ -9,88 +9,49 @@ public abstract class Building {
         this.name = name;
     }
 
-    public abstract String getType();
+    public String getName() {
+        return this.name;
+    }
 }
 
-class Hospital extends Building{
-    ArrayList<Animal> sickAnimals = new ArrayList<>();
-
+class Hospital extends Building {
     public Hospital(String name) {
         super(name);
     }
-
-    @Override
-    public String getType(){
-        return "Hospital";
-    }
 }
 
-class Enclosure extends Building{
-    ArrayList<Animal> enclosedAnimals = new ArrayList<>();
-
+class Enclosure extends Building {
     public Enclosure(String name) {
         super(name);
     }
-
-    @Override
-    public String getType(){
-        return "Building";
-    }
 }
 
-abstract class Shop extends Building{
+abstract class Shop extends Building {
     public Shop(String name) {
         super(name);
     }
-
-    @Override
-    public String getType() {
-        return getShopType() + " Shop";
-    }
-
-    public abstract String getShopType();
 }
 
-class TicketShop extends Shop{
+class TicketShop extends Shop {
     public TicketShop(String name) {
         super(name);
     }
-
-    @Override
-    public String getShopType(){
-        return "Ticket";
-    }
 }
 
-class FoodShop extends Shop{
+class FoodShop extends Shop {
     public FoodShop(String name) {
         super(name);
     }
-
-    @Override
-    public String getShopType(){
-        return "Food";
-    }
 }
 
-class DrinkShop extends Shop{
+class DrinkShop extends Shop {
     public DrinkShop(String name) {
         super(name);
     }
-
-    @Override
-    public String getShopType(){
-        return "Drink";
-    }
 }
 
-class GiftShop extends Shop{
+class GiftShop extends Shop {
     public GiftShop(String name) {
         super(name);
-    }
-
-    @Override
-    public String getShopType(){
-        return "Gift";
     }
 }

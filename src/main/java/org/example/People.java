@@ -1,11 +1,10 @@
 package org.example;
 
-public class People {
-
+public abstract class People {
     private String name;
-    private String location;
+    private Building location;
 
-    public People(String name, String location) {
+    public People(String name, Building location) {
         this.name = name;
         this.location = location;
     }
@@ -14,16 +13,13 @@ public class People {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLocation() {
+    public Building getLocation() {
         return location;
     }
 
-    public void goTo(String location) {
+    public void goTo(Building location) {
         this.location = location;
+        System.out.println(this.name + " is now at " + location.getName());
     }
 }
 
@@ -31,7 +27,7 @@ class Visitor extends People {
     private int age;
     private String ticketCode;
 
-    public Visitor(String name, String location) {
+    public Visitor(String name, Building location) {
         super(name, location);
     }
 
@@ -46,17 +42,12 @@ class Visitor extends People {
     public void setTicketCode(String ticketCode) {
         this.ticketCode = ticketCode;
     }
-
-    public String getTicketCode() {
-        return ticketCode;
-    }
 }
 
-
-class Manager extends People{
+class Manager extends People {
     private String password;
 
-    public Manager(String name, String location, String password) {
+    public Manager(String name, Building location, String password) {
         super(name, location);
         this.password = password;
     }
@@ -65,69 +56,29 @@ class Manager extends People{
         return password;
     }
 
-    public void openZoo(){
-        System.out.println("Zoo opened");
+    public void openZoo(Zoo zoo) {
+        zoo.setOpen(true);
     }
 
-    public void closeZoo(){
-        System.out.printf("Zoo closed");
+    public void closeZoo(Zoo zoo) {
+        zoo.setOpen(false);
     }
 }
 
-class Vendor extends People{
-    public Vendor(String name, String location) {
+class Vendor extends People {
+    public Vendor(String name, Building location) {
         super(name, location);
     }
-
-    public void sell(){
-        System.out.println("Sell stuff");
-    }
 }
 
-class Handler extends People{
-    public Handler(String name, String location) {
+class Handler extends People {
+    public Handler(String name, Building location) {
         super(name, location);
     }
-
-    public void feed(){
-
-    }
-
-    public void exercise(){
-
-    }
-
-    public void examine(){
-
-    }
 }
 
-class Veterinarian extends People{
-    public Veterinarian(String name, String location) {
+class Veterinarian extends People {
+    public Veterinarian(String name, Building location) {
         super(name, location);
     }
-
-    public void heal(){
-
-    }
-
-    public void lecture(){
-        
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
