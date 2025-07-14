@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public abstract class People {
     private String name;
     private Building location;
@@ -72,8 +74,20 @@ class Vendor extends People {
 }
 
 class Handler extends People {
+    ArrayList<Animal> animalsHandled = new ArrayList<>();
+
     public Handler(String name, Building location) {
         super(name, location);
+    }
+
+    public void assignAnimal(Animal animalAssignment){
+        animalsHandled.add(animalAssignment);
+    }
+
+    public void getAnimalsHandled(){
+        for (Animal animal : animalsHandled) {
+            System.out.println(animal.getName());
+        }
     }
 }
 
