@@ -42,7 +42,8 @@ public class Main {
                     break;
                 case "4":
                     System.out.println("Opening Handler Module");
-                    HandlerModule.runHandler();
+                    HandlerModule handlerModule = new HandlerModule(zoo, scanner);
+                    handlerModule.runHandler();
                     break;
                 case "5":
                     System.out.println("Exiting simulation. Goodbye!");
