@@ -9,6 +9,13 @@ Johnvee Mandal </br>
 Session 1: Zoo Simulation </br>
 
 
-### Screenshot of WIP output: </br>
+### Screenshot of output: </br>
 
-![WIP Test](Springboot-1.png)
+![Zoo Diagram](Springboot-1.png)
+
+![Zoo Diagram](Springboot-2.png)
+
+![Zoo Diagram](Springboot-3.png)
+
+![Zoo Diagram](Springboot-4.png)
+
