@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Building {
     String name;
@@ -21,27 +22,15 @@ class Hospital extends Building {
 }
 
 class Enclosure extends Building {
-    ArrayList<Animal> animalsInside = new ArrayList<>();
-
     public Enclosure(String name) {
         super(name);
-    }
-
-    public void addAnimal(Animal animalToBeAdded){
-        animalsInside.add(animalToBeAdded);
-    }
-
-    public void getAnimalsInside(){
-        for (Animal animal : animalsInside) {
-            System.out.println(animal.getName());
-        }
     }
 }
 
 abstract class Shop extends Building {
-    public Shop(String name) {
-        super(name);
-    }
+    protected List<Product> products = new ArrayList<>();
+    public Shop(String name) { super(name); }
+    public List<Product> getProducts() { return products; }
 }
 
 class TicketShop extends Shop {
@@ -53,6 +42,11 @@ class TicketShop extends Shop {
 class FoodShop extends Shop {
     public FoodShop(String name) {
         super(name);
+        // Add default products to the food shop
+        products.add(new Product("Soft Drink", 30));
+        products.add(new Product("Popcorn", 50));
+        products.add(new Product("Plush Toy", 120));
+        products.add(new Product("Keychain", 45));
     }
 }
 
@@ -66,4 +60,12 @@ class GiftShop extends Shop {
     public GiftShop(String name) {
         super(name);
     }
+}
+
+class Product {
+    private String name;
+    private double price;
+    public Product(String name, double price) { this.name = name; this.price = price; }
+    public String getName() { return name; }
+    public double getPrice() { return price; }
 }
