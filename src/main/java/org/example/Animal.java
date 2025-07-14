@@ -19,6 +19,7 @@ public abstract class Animal implements Specie {
 
     public String getName() { return animalName; }
     public void eat() { System.out.println(animalName + " is eating."); }
+    public void exercise() { System.out.println(animalName + " is exercising."); }
     public void makeSound() { System.out.println(animalName + " makes a sound."); }
 
     @Override
