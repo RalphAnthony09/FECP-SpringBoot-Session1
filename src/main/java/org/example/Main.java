@@ -45,7 +45,7 @@ public class Main {
                     System.out.println("Exiting simulation. Goodbye!");
                     return;
             case "5":
-                System.out.println("Opening Handler Module");
+                System.out.println("Openning Handler Module");
                 HandlerModule.runHandler();
                 return;
                 default:
