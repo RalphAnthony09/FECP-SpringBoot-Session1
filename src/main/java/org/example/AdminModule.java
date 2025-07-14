@@ -11,7 +11,7 @@ public class AdminModule {
         this.zoo = zoo;
         this.scanner = scanner;
         this.manager = new Manager("Masterchief", null, "12345");
-        this.zoo.addPerson(this.manager);
+        this.zoo.addPerson(this.manager); // Ensure manager is in the zoo's list
     }
 
     public void runAdminModule() {

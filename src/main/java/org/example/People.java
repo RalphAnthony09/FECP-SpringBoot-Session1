@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public abstract class People {
     private String name;
     private Building location;
@@ -35,6 +37,10 @@ class Visitor extends People {
         this.age = age;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     public void setTicketCode(String ticketCode) {
         this.ticketCode = ticketCode;
     }
@@ -54,12 +60,10 @@ class Manager extends People {
 
     public void openZoo(Zoo zoo) {
         zoo.setOpen(true);
-        System.out.println("The Zoo is now open to visitors.");
     }
 
     public void closeZoo(Zoo zoo) {
         zoo.setOpen(false);
-        System.out.println("The Zoo is now closed to visitors.");
     }
 }
 
@@ -70,18 +74,20 @@ class Vendor extends People {
 }
 
 class Handler extends People {
+    ArrayList<Animal> animalsHandled = new ArrayList<>();
+
     public Handler(String name, Building location) {
         super(name, location);
     }
 
-    public void feed(Animal animal) {
-        System.out.println(this.getName() + " is feeding " + animal.getName());
-        animal.eat();
+    public void assignAnimal(Animal animalAssignment){
+        animalsHandled.add(animalAssignment);
     }
 
-    public void exercise(Animal animal) {
-        System.out.println(this.getName() + " is exercising " + animal.getName());
-        animal.exercise();
+    public void getAnimalsHandled(){
+        for (Animal animal : animalsHandled) {
+            System.out.println(animal.getName());
+        }
     }
 }
 

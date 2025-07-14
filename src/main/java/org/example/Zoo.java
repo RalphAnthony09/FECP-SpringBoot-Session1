@@ -14,30 +14,17 @@ public class Zoo {
     private boolean isOpen = false;
 
     public Zoo() {
-        Building pEnclosure = new Enclosure("Pachyderm Enclosure");
-        Building fEnclosure = new Enclosure("Feline Enclosure");
-        Building bEnclosure = new Enclosure("Bird Enclosure");
-        buildings.add(pEnclosure);
-        buildings.add(fEnclosure);
-        buildings.add(bEnclosure);
+        buildings.add(new Enclosure("Pachyderm Enclosure"));
+        buildings.add(new Enclosure("Feline Enclosure"));
+        buildings.add(new Enclosure("Bird Enclosure"));
         buildings.add(new Hospital("Animal Hospital"));
         buildings.add(new TicketShop("Ticket Shop"));
         buildings.add(new FoodShop("Food Shop"));
-
-        animals.add(new Pachyderm("Dumbo", true, pEnclosure));
-        animals.add(new Feline("Simba", true, fEnclosure));
-        animals.add(new Bird("Zazu", true, bEnclosure));
     }
 
     public void addPerson(People person) {
         if (!people.contains(person)) {
             people.add(person);
-        }
-    }
-
-    public void addAnimal(Animal animal) {
-        if (!animals.contains(animal)) {
-            animals.add(animal);
         }
     }
 
@@ -53,10 +40,13 @@ public class Zoo {
         return validTickets.get(ticketCode);
     }
 
-    public List<People> getPeople() { return people; }
-    public List<Animal> getAnimals() { return animals; }
-    public boolean isOpen() { return isOpen; }
-    public void setOpen(boolean open) { isOpen = open; }
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
+    }
 
     public List<Enclosure> getEnclosures() {
         return buildings.stream()
@@ -68,13 +58,6 @@ public class Zoo {
     public Building getBuildingByName(String name) {
         return buildings.stream()
                 .filter(b -> b.getName().equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public Shop getFoodShop() {
-        return (Shop) buildings.stream()
-                .filter(b -> b instanceof FoodShop)
                 .findFirst()
                 .orElse(null);
     }
