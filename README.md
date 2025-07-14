@@ -19,3 +19,7 @@ Session 1: Zoo Simulation </br>
 
 ![Zoo Diagram](Springboot-4.png)
 
+![Zoo Diagram](Springboot-5.png)
+
+![Zoo Diagram](Springboot-6.png)
+
