@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ZooModule {
@@ -67,57 +68,7 @@ public class ZooModule {
     }
 
     private void visitShop() {
-        System.out.println("\n=== \uD83D\uDED2 Zoo Shop ===");
-        Shop shop = zoo.getFoodShop();
-        if (shop == null) {
-            System.out.println("The shop is closed.");
-            return;
-        }
-        visitor.goTo(shop);
-
-        List<Product> products = shop.getProducts();
-        List<Product> cart = new ArrayList<>();
-        double total = 0;
-
-        System.out.println("Available Products:");
-        for (int i = 0; i < products.size(); i++) {
-            System.out.printf("%d. %s - P%.2f\n", i + 1, products.get(i).getName(), products.get(i).getPrice());
-        }
-
-        System.out.print("Enter the numbers of the items you want to buy (e.g., 1 3): ");
-        String[] choices = scanner.nextLine().split(" ");
-
-        System.out.println("\nSelected:");
-        for (String c : choices) {
-            try {
-                int itemNum = Integer.parseInt(c.trim()) - 1;
-                if (itemNum >= 0 && itemNum < products.size()) {
-                    Product p = products.get(itemNum);
-                    cart.add(p);
-                    total += p.getPrice();
-                    System.out.printf("- %s (P%.2f)\n", p.getName(), p.getPrice());
-                }
-            } catch (NumberFormatException e) {
-            }
-        }
-
-        if (cart.isEmpty()) {
-            System.out.println("No valid items selected.");
-            return;
-        }
-
-        System.out.printf("\nTotal: P%.2f\n", total);
-        System.out.print("Proceed to checkout? (yes/no): ");
-        if (scanner.nextLine().equalsIgnoreCase("yes")) {
-            System.out.println("\nPayment successful!");
-            System.out.println("Receipt:");
-            for (Product p : cart) {
-                System.out.printf("- %s: P%.2f\n", p.getName(), p.getPrice());
-            }
-            System.out.printf("Total Paid: P%.2f\n", total);
-        } else {
-            System.out.println("Purchase cancelled.");
-        }
+        System.out.println("\nVisiting the shop...");
     }
 
     private void visitHospital() {
