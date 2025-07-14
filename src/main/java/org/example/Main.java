@@ -47,6 +47,10 @@ public class Main {
                 case "5":
                     System.out.println("Exiting simulation. Goodbye!");
                     return;
+            case "5":
+                System.out.println("Opening Handler Module");
+                HandlerModule.runHandler();
+                return;
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
