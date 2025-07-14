@@ -1,86 +1,96 @@
 package org.example;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class HandlerModule {
+    private Zoo zoo;
+    private Scanner scanner;
 
-    public static void runHandler(){
-        Scanner scanner = new Scanner(System.in);
-
-        Enclosure felineEnclosure = new Enclosure("Feline");
-
-        Animal tiger = new Feline("Tigress",true, felineEnclosure);
-        Animal lion = new Feline("lioness",true, felineEnclosure);
-
-        System.out.println("Handler Module");
-
-        System.out.print("Choose a handler name: ");
-        String handlerName = scanner.nextLine();
-
-        Handler handler = new Handler(handlerName, felineEnclosure);
-
-        handler.assignAnimal(tiger);
-        handler.assignAnimal(lion);
-
-        while (true){
-            handler.getAnimalsHandled();
-            System.out.print("Choose animal to interact with (0 to exit): ");
-            int choice = scanner.nextInt();
-            if(choice == 1){
-                System.out.println("\nChoose Action:");
-                System.out.println("Feed " + tiger.getName());
-                System.out.println("Exercise " + tiger.getName());
-                System.out.println("Examine " + tiger.getName());
-                System.out.println("Back");
-                System.out.print("\nChoose an option: ");
-                int animalChoice = scanner.nextInt();
-                switch (animalChoice){
-                    case 1:
-                        System.out.println("Feeding " + tiger.getName());
-                        tiger.eat();
-                        break;
-                    case 2:
-                        System.out.println("Exercising " + tiger.getName());
-                        tiger.exercise();
-                        break;
-                    case 3:
-                        System.out.println("Examining " + tiger.getName());
-                        break;
-                    case 4:
-                        break;
-                }
-            }
-            else if(choice == 2){
-                System.out.println("\nChoose Action:");
-                System.out.println("Feed " + lion.getName());
-                System.out.println("Exercise " + lion.getName());
-                System.out.println("Examine " + lion.getName());
-                System.out.println("Back");
-                System.out.print("\nChoose an option: ");
-                int animalChoice = scanner.nextInt();
-                switch (animalChoice){
-                    case 1:
-                        System.out.println("Feeding " + lion.getName());
-                        tiger.eat();
-                        break;
-                    case 2:
-                        System.out.println("Exercising " + lion.getName());
-                        tiger.exercise();
-                        break;
-                    case 3:
-                        System.out.println("Examining " + lion.getName());
-                        break;
-                    case 4:
-                        break;
-                }
-            } else if (choice == 0) {
-                System.out.println("Finished duties for today");
-                return;
-            }
-        }
-
-
+    public HandlerModule(Zoo zoo, Scanner scanner) {
+        this.zoo = zoo;
+        this.scanner = scanner;
     }
 
+    public void runHandler() {
+        System.out.println("\n--- Handler Module ---");
+        System.out.print("Enter your handler name: ");
+        String handlerName = scanner.nextLine();
 
+        Handler handler = findHandler(handlerName);
+        if (handler == null) {
+            System.out.println("Handler not found. Please set up staff in the Admin Module.");
+            return;
+        }
+
+        System.out.println("Welcome, " + handler.getName() + "!");
+
+        List<Animal> assignedAnimals = getAssignedAnimals(handler);
+        if (assignedAnimals.isEmpty()) {
+            System.out.println("You have no animals assigned to your enclosure.");
+            return;
+        }
+
+        while (true) {
+            System.out.println("\nAnimals assigned to you:");
+            for (int i = 0; i < assignedAnimals.size(); i++) {
+                System.out.println((i + 1) + ". " + assignedAnimals.get(i).getName());
+            }
+            System.out.print("Choose animal to interact with (0 to exit): ");
+            int choice;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+
+            if (choice == 0) {
+                System.out.println("Finished duties for today.");
+                return;
+            }
+            if (choice > 0 && choice <= assignedAnimals.size()) {
+                interactWithAnimal(handler, assignedAnimals.get(choice - 1));
+            } else {
+                System.out.println("Invalid choice.");
+            }
+        }
+    }
+
+    private Handler findHandler(String name) {
+        return zoo.getPeople().stream()
+                .filter(p -> p instanceof Handler && p.getName().equalsIgnoreCase(name))
+                .map(p -> (Handler) p)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private List<Animal> getAssignedAnimals(Handler handler) {
+        return zoo.getAnimals().stream()
+                .filter(a -> a.getLocation().equals(handler.getLocation()))
+                .collect(Collectors.toList());
+    }
+
+    private void interactWithAnimal(Handler handler, Animal animal) {
+        System.out.println("\nChoose Action for " + animal.getName() + ":");
+        System.out.println("1. Feed");
+        System.out.println("2. Exercise");
+        System.out.println("3. Back");
+        System.out.print("Choose an option: ");
+        String actionChoice = scanner.nextLine();
+
+        switch (actionChoice) {
+            case "1":
+                handler.feed(animal);
+                break;
+            case "2":
+                handler.exercise(animal);
+                break;
+            case "3":
+                break;
+            default:
+                System.out.println("Invalid action.");
+        }
+    }
 }
