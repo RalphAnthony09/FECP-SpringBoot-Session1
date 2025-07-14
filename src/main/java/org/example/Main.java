@@ -13,8 +13,8 @@ public class Main {
             System.out.println("1. Admin Module");
             System.out.println("2. Ticketing Module");
             System.out.println("3. Zoo Module");
-            System.out.println("4. Exit Simulation");
-            System.out.println("5. Handler Module");
+            System.out.println("4. Handler Module");
+            System.out.println("5. Exit Simulation");
             System.out.print("Choose an option: ");
             String choice = scanner.nextLine();
 
@@ -42,12 +42,12 @@ public class Main {
                     }
                     break;
                 case "4":
+                    System.out.println("Opening Handler Module");
+                    HandlerModule.runHandler();
+                    break;
+                case "5":
                     System.out.println("Exiting simulation. Goodbye!");
                     return;
-            case "5":
-                System.out.println("Openning Handler Module");
-                HandlerModule.runHandler();
-                return;
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
