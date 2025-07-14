@@ -7,6 +7,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Zoo zoo = new Zoo();
 
+
         while (true) {
             System.out.println("\n\n=== ZOO SIMULATION MAIN MENU ===");
             System.out.println("1. Admin Module");
