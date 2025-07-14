@@ -21,8 +21,20 @@ class Hospital extends Building {
 }
 
 class Enclosure extends Building {
+    ArrayList<Animal> animalsInside = new ArrayList<>();
+
     public Enclosure(String name) {
         super(name);
+    }
+
+    public void addAnimal(Animal animalToBeAdded){
+        animalsInside.add(animalToBeAdded);
+    }
+
+    public void getAnimalsInside(){
+        for (Animal animal : animalsInside) {
+            System.out.println(animal.getName());
+        }
     }
 }
 
