@@ -5,15 +5,15 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class HandlerModule {
-    private Zoo zoo;
-    private Scanner scanner;
+    private static Zoo zoo;
+    private static Scanner scanner;
 
-    public HandlerModule(Zoo zoo, Scanner scanner) {
+    public  HandlerModule(Zoo zoo, Scanner scanner) {
         this.zoo = zoo;
         this.scanner = scanner;
     }
 
-    public void runHandler() {
+    public static void runHandler() {
         System.out.println("\n--- Handler Module ---");
         System.out.print("Enter your handler name: ");
         String handlerName = scanner.nextLine();
@@ -58,7 +58,7 @@ public class HandlerModule {
         }
     }
 
-    private Handler findHandler(String name) {
+    private static Handler findHandler(String name) {
         return zoo.getPeople().stream()
                 .filter(p -> p instanceof Handler && p.getName().equalsIgnoreCase(name))
                 .map(p -> (Handler) p)
@@ -66,13 +66,13 @@ public class HandlerModule {
                 .orElse(null);
     }
 
-    private List<Animal> getAssignedAnimals(Handler handler) {
+    private static List<Animal> getAssignedAnimals(Handler handler) {
         return zoo.getAnimals().stream()
                 .filter(a -> a.getLocation().equals(handler.getLocation()))
                 .collect(Collectors.toList());
     }
 
-    private void interactWithAnimal(Handler handler, Animal animal) {
+    private static void interactWithAnimal(Handler handler, Animal animal) {
         System.out.println("\nChoose Action for " + animal.getName() + ":");
         System.out.println("1. Feed");
         System.out.println("2. Exercise");
