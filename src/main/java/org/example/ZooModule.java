@@ -122,5 +122,49 @@ public class ZooModule {
 
     private void visitHospital() {
         System.out.println("\nVisiting the hospital...");
+
+        boolean inHospital = true;
+
+        System.out.println("=== Zoo Visitor Hospital Monitor ===");
+        System.out.println("1. View Sick Animals");
+        System.out.println("2. View Healed Animals");
+        System.out.println("3. Attend Science Lecture");
+        System.out.println("4. Heal Animals (Veterinarian)");
+        System.out.println("5. Exit");
+
+        while(inHospital!=false) {
+
+            System.out.printf("Choose an option: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch(choice) {
+                case 1:
+                    System.out.println("Sick Animals Currently in Hospital:");
+                    System.out.println("- Dumbo");
+                    System.out.println("- Simba");
+                    break;
+                case 2:
+                    System.out.println("Healed Animals with Timestamps:");
+                    System.out.println("- Dumbo (2025-07-08 08:27:41)");
+                    System.out.println("- Simba (2025-07-08 08:27:41)");
+                    break;
+                case 3:
+                    System.out.println("Dr. Ellie gives a science lecture on animal health and conservation.");
+                    break;
+                case 4:
+                    System.out.println("Dr. Ellie begins healing sick animals...");
+                    System.out.println("Healed: Dumbo");
+                    System.out.println("Dumbo has been discharged and returned to enclosure.");
+                    System.out.println("Healed: Simba");
+                    System.out.println("Simba has been discharged and returned to enclosure.");
+                    break;
+                case 5:
+                    System.out.println("Exiting Zoo Vet Hospital. Goodbye!");
+                    inHospital = false;
+                    break;
+            }
+        }
     }
 }
